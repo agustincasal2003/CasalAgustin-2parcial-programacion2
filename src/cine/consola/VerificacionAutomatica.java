@@ -223,13 +223,21 @@ public final class VerificacionAutomatica {
             () -> reservar(f4, "11111111", "Test", new String[] {"Z9"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
         esperaError("Cliente sin nombre", ValidacionException.class,
             () -> reservar(f4, "11111111", " ", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
+        esperaError("Nombre con números", ValidacionException.class,
+            () -> reservar(f4, "11111111", "Test 123", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
         esperaError("Cliente sin identificación", ValidacionException.class,
             () -> reservar(f4, "", "Test", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
         esperaError("Identificación con espacios", ValidacionException.class,
             () -> reservar(f4, "12 34", "Test", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
-        Reserva conPasaporte = reservar(f4, "AB-123.4", "Turista", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL});
-        verificar("Identificación alfanumérica con guion y punto (sin largo mínimo ni máximo) aceptada", conPasaporte != null);
-        reservas.cancelar(conPasaporte.getCodigo());
+        esperaError("Documento con menos de 8 números", ValidacionException.class,
+            () -> reservar(f4, "1234567", "Test", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
+        esperaError("Documento con más de 8 números", ValidacionException.class,
+            () -> reservar(f4, "123456789", "Test", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
+        esperaError("Documento con letras", ValidacionException.class,
+            () -> reservar(f4, "AB-123.4", "Test", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL}));
+        Reserva conDocumento = reservar(f4, "12345678", "Cliente Ocho", new String[] {"A1"}, new TipoEntrada[] {TipoEntrada.GENERAL});
+        verificar("Documento de exactamente 8 números aceptado", conDocumento != null);
+        reservas.cancelar(conDocumento.getCodigo());
 
         titulo("Prueba 8: exportación");
         int reservasAntes = reservas.listar().size();

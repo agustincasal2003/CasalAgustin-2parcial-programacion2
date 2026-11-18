@@ -316,9 +316,13 @@ public class MainApp extends Application {
         txtNombre.setPromptText("Ej: Martín Gómez");
         TextField txtIdentificacion = new TextField(solicitud.getIdentificacion());
         txtIdentificacion.setPromptText("Ej: 28456789");
+        txtNombre.setTextFormatter(new TextFormatter<String>(c ->
+            c.getControlNewText().matches("[\\p{L} ]*") ? c : null));
+        txtIdentificacion.setTextFormatter(new TextFormatter<String>(c ->
+            c.getControlNewText().matches("\\d{0,8}") ? c : null));
         form.add(new Label("Nombre y Apellido:"), 0, 0);
         form.add(txtNombre, 1, 0);
-        form.add(new Label("Identificación (DNI):"), 0, 1);
+        form.add(new Label("Documento (8 números):"), 0, 1);
         form.add(txtIdentificacion, 1, 1);
 
         Label lblEntradas = new Label("Tipo de entrada por butaca:");
@@ -352,6 +356,14 @@ public class MainApp extends Application {
 
         btnConfirmar.setOnAction(e -> {
             solicitud.setCliente(txtIdentificacion.getText(), txtNombre.getText());
+            if (!txtNombre.getText().trim().matches("[\\p{L} ]+")) {
+                mostrarAdvertencia("El nombre solo puede contener letras y espacios (sin números ni símbolos).");
+                return;   // no se pierde lo ingresado
+            }
+            if (!txtIdentificacion.getText().trim().matches("\\d{8}")) {
+                mostrarAdvertencia("El documento debe tener exactamente 8 números (sin puntos, letras ni espacios).");
+                return;   // no se pierde lo ingresado
+            }
             try {
                 Reserva reserva = reservaService.confirmar(solicitud);   // valida, reserva y GUARDA en el archivo
                 mostrarComprobante(reserva);

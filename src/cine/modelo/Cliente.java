@@ -15,13 +15,15 @@ public class Cliente implements Identificable<String>, Serializable {
         if (nombre == null || nombre.isBlank()) {
             throw new ValidacionException("El nombre del cliente es obligatorio");
         }
+        if (!nombre.trim().matches("[\\p{L} ]+")) {
+            throw new ValidacionException("El nombre solo puede contener letras y espacios (sin números ni símbolos)");
+        }
         if (identificacion == null || identificacion.isBlank()) {
             throw new ValidacionException("La identificación del cliente es obligatoria");
         }
         String id = identificacion.trim();
-        if (!id.matches("[\\p{L}\\p{N}.\\-]+")) {
-            throw new ValidacionException(
-                "La identificación solo puede contener letras, números, puntos y guiones, sin espacios");
+        if (!id.matches("\\d{8}")) {
+            throw new ValidacionException("El documento debe tener exactamente 8 números (sin puntos, letras ni espacios)");
         }
         this.identificacion = id;
         this.nombre = nombre.trim();
