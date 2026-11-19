@@ -216,8 +216,8 @@ public class MainApp extends Application {
             + " (" + funcion.getSala().getNombre() + ", " + FORMATO_FECHA_HORA.format(funcion.getInicio()) + ")");
         titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;");
 
-        Label pantalla = new Label("================ PANTALLA ================");
-        pantalla.setStyle("-fx-background-color: #bdc3c7; -fx-padding: 10px; -fx-alignment: center; -fx-font-weight: bold;");
+        Label pantalla = new Label("Seleccione Su Asiento");
+        pantalla.setStyle("-fx-background-color: #bdc3c7; -fx-padding: 4px; -fx-alignment: center; -fx-font-weight: bold;");
         pantalla.setMaxWidth(Double.MAX_VALUE);
 
         // Se consulta cada vez que se arma la vista: así un cliente nuevo ve lo que reservó el anterior
@@ -438,7 +438,7 @@ public class MainApp extends Application {
         titulo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;");
 
         TextField txtBuscar = new TextField();
-        txtBuscar.setPromptText("Código de reserva o DNI del cliente (vacío = todas)");
+        txtBuscar.setPromptText("Código de reserva o DNI del cliente");
 
         TableView<Reserva> tabla = new TableView<>();
         VBox.setVgrow(tabla, Priority.ALWAYS);
