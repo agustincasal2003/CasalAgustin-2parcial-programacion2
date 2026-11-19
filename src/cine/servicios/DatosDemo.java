@@ -44,11 +44,11 @@ public final class DatosDemo {
         reservar(reservas, f1, "30111222", "Lucía Pérez",
             new String[] {"A1", "A2"}, new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.GENERAL});
         reservar(reservas, f1, "28456789", "Martín Gómez",
-            new String[] {"B3", "B4"}, new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESTUDIANTE});
+            new String[] {"B3", "B4"}, new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESPECIAL});
         Reserva aCancelar = reservar(reservas, f2, "31222333", "Ana López",
             new String[] {"C1"}, new TipoEntrada[] {TipoEntrada.GENERAL});
         reservar(reservas, f3, "30111222", "Lucía Pérez",
-            new String[] {"A1", "A2"}, new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESTUDIANTE});
+            new String[] {"A1", "A2"}, new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESPECIAL});
         reservar(reservas, f5, "28456789", "Martín Gómez",
             new String[] {"B3"}, new TipoEntrada[] {TipoEntrada.GENERAL});
 

@@ -327,6 +327,9 @@ public class MainApp extends Application {
 
         Label lblEntradas = new Label("Tipo de entrada por butaca:");
         lblEntradas.setStyle("-fx-font-weight: bold;");
+        Label lblBeneficio = new Label("ESPECIAL: BENEFICIO DEL 20 % A JUBILADOS,DISCAPICTADOS, MENORES, ESTUDIANTES Y EX/COMBATIENTES");
+        lblBeneficio.setStyle("-fx-text-fill: #2980b9; -fx-font-weight: bold;");
+        lblBeneficio.setWrapText(true);
         Label lblTotal = new Label();
         lblTotal.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
 
@@ -381,7 +384,8 @@ public class MainApp extends Application {
         });
 
         HBox panelBotones = new HBox(15, btnVolver, btnConfirmar);
-        vbox.getChildren().addAll(titulo, form, new Separator(), lblEntradas, contenedor, lblTotal, new Separator(), panelBotones);
+        vbox.getChildren().addAll(titulo, form, new Separator(), lblEntradas, lblBeneficio, contenedor, lblTotal, new Separator(), panelBotones);
+        //vbox.getChildren().addAll(titulo, form, new Separator(), lblEntradas, contenedor, lblTotal, new Separator(), panelBotones);
         return vbox;
     }
 

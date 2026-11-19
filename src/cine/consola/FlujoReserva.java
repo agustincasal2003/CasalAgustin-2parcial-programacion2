@@ -89,14 +89,14 @@ public class FlujoReserva {
     }
 
     private TipoEntrada pedirTipo(String codigo, TipoEntrada actual) {
-        int defecto = actual == TipoEntrada.ESTUDIANTE ? 2 : 1;
+        int defecto = actual == TipoEntrada.ESPECIAL ? 2 : 1;
         while (true) {
             int opcion = lector.leerEntero("Tipo de entrada para " + codigo + " (1 = General, 2 = Estudiante)", defecto);
             if (opcion == 1) {
                 return TipoEntrada.GENERAL;
             }
             if (opcion == 2) {
-                return TipoEntrada.ESTUDIANTE;
+                return TipoEntrada.ESPECIAL;
             }
             lector.mostrarError("Elegí 1 (General) o 2 (Estudiante)");
         }

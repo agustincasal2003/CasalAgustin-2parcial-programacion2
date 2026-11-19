@@ -4,7 +4,7 @@ import cine.excepciones.PersistenciaException;
 import cine.excepciones.ReglaNegocioException;
 import cine.excepciones.ValidacionException;
 import cine.modelo.Entrada;
-import cine.modelo.EntradaEstudiante;
+import cine.modelo.EntradaEspecial;
 import cine.modelo.EntradaGeneral;
 import cine.modelo.Funcion;
 import cine.modelo.Pelicula;
@@ -121,14 +121,14 @@ public final class VerificacionAutomatica {
 
         titulo("Pruebas 1 y 7: reservar varias butacas, precios por polimorfismo");
         Reserva r1 = reservar(f1, "28456789", "Martín Gómez", new String[] {"B3", "B4"},
-            new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESTUDIANTE});
+            new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESPECIAL});
         verificar("Código CIN-001 y 2 butacas reservadas", r1.getCodigo().equals("CIN-001") && r1.getEntradas().size() == 2);
         Entrada e0 = r1.getEntradas().get(0);
         Entrada e1 = r1.getEntradas().get(1);
         verificar("B3 es EntradaGeneral y cuesta 5000.00",
             e0 instanceof EntradaGeneral && e0.getPrecio().compareTo(new BigDecimal("5000")) == 0);
         verificar("B4 es EntradaEstudiante y cuesta 4000.00 (20 % de descuento)",
-            e1 instanceof EntradaEstudiante && e1.getPrecio().compareTo(new BigDecimal("4000")) == 0);
+            e1 instanceof EntradaEspecial && e1.getPrecio().compareTo(new BigDecimal("4000")) == 0);
         verificar("Total 9000.00", r1.getTotal().compareTo(new BigDecimal("9000")) == 0);
         verificar("Butacas ocupadas en f1: B3 y B4", reservas.butacasOcupadas(f1).size() == 2);
 
@@ -164,7 +164,7 @@ public final class VerificacionAutomatica {
         verificar("Reserva anterior mantiene su importe (10000.00)",
             r3.getTotal().compareTo(totalAntes) == 0 && totalAntes.compareTo(new BigDecimal("10000")) == 0);
         Reserva r4 = reservar(f1, "29333444", "Ana López", new String[] {"C1", "C2"},
-            new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESTUDIANTE});
+            new TipoEntrada[] {TipoEntrada.GENERAL, TipoEntrada.ESPECIAL});
         verificar("La nueva reserva usa 6000 y 4800 (total 10800.00)", r4.getTotal().compareTo(new BigDecimal("10800")) == 0);
         verificar("El cliente existente se reutilizó (sin duplicar)", estado.getClientes().listar().size() == 3);
         esperaError("Precio 0", ValidacionException.class, () -> funciones.modificarPrecio(f1.getId(), BigDecimal.ZERO));

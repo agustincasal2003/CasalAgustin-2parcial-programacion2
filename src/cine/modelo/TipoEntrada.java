@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public enum TipoEntrada {
     GENERAL("General"),
-    ESTUDIANTE("Estudiante");
+    ESPECIAL("Especial");
 
     private final String etiqueta;
 
@@ -18,7 +18,7 @@ public enum TipoEntrada {
     public Entrada crearEntrada(Butaca butaca, BigDecimal precioBase) {
         return switch (this) {
             case GENERAL -> new EntradaGeneral(butaca, precioBase);
-            case ESTUDIANTE -> new EntradaEstudiante(butaca, precioBase);
+            case ESPECIAL -> new EntradaEspecial(butaca, precioBase);
         };
     }
 }
