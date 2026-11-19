@@ -327,7 +327,7 @@ public class MainApp extends Application {
 
         Label lblEntradas = new Label("Tipo de entrada por butaca:");
         lblEntradas.setStyle("-fx-font-weight: bold;");
-        Label lblBeneficio = new Label("ESPECIAL: BENEFICIO DEL 20 % A JUBILADOS,DISCAPICTADOS, MENORES, ESTUDIANTES Y EX/COMBATIENTES");
+        Label lblBeneficio = new Label("ESPECIAL: BENEFICIO DEL 20 % A JUBILADOS,DISCAPACITADOS, MENORES, ESTUDIANTES Y EX/COMBATIENTES");
         lblBeneficio.setStyle("-fx-text-fill: #2980b9; -fx-font-weight: bold;");
         lblBeneficio.setWrapText(true);
         Label lblTotal = new Label();
